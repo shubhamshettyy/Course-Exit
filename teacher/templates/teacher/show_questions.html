@@ -1,0 +1,39 @@
+{% extends 'course/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %} 
+	<div class="container mt-4">
+		<div class="d-flex flex-row">
+			<div>
+				<p class="h2" style="color: black">List of Questions</p>
+				<!-- <button class="btn btn-outline-light btn-sm ml-auto p-2">Add Question</button> -->
+			</div>
+			{% if isHod %}
+				<div class="ml-auto p-2">
+					<a href="{% url 'create_questions' course.id %}"><button class="btn btn-outline-primary btn-sm">Add Question</button></a>
+				</div>
+			{% endif %}
+ 
+		</div>
+		<div style="height: .25rem;width:100%;background-image: linear-gradient(to right,#0575E6,#021B79); border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; "></div>
+	</div>	
+
+	
+	{% for question in questions %}
+
+		<div class="container">
+			<div class="card" style="width: 100%,height: 3rem;margin-top: 2rem">
+				<div class="card-body">
+					<h2 class="card-title">{{ question.question }}</h2>
+					{% if isHod %}
+						<a href="{% url 'update_questions' question.course.id question.id %}" class="card-link btn btn-outline-primary btn-sm">Update</a>
+						<a href="{% url 'delete_questions' question.course.id question.id %}" class="card-link btn btn-outline-primary btn-sm">Delete</a>
+					{% endif %}
+					<a href="{% url 'show_responses' question.course.id question.id %}" class="card-link btn btn-outline-primary btn-sm">Check Responses</a>
+				</div>
+				<div style="height: .5rem;width:100%;background-image: linear-gradient(to right,#0575E6,#021B79); border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; "></div>
+			</div>
+		</div>
+
+	{% endfor %}	
+
+{% endblock content %}	 

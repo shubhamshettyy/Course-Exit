@@ -1,0 +1,52 @@
+{% extends 'course/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+	<div class="container mt-4">
+		<p class="h2">Responses</p>
+		<div style="height: .25rem;width:100%;background-image: linear-gradient(to right,#0575E6,#021B79); border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; "></div>
+		
+	</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+  		{% for index,data in data_list %}
+
+	  	<div id="container" style="width: 75%;">
+   		 <canvas id="pie-chart {{ index }}"></canvas>
+   		</div>
+		  
+	  {% endfor %}
+  
+
+	  {% for index,data in data_list %}
+		  
+	  <script>
+	    var config = {
+	      type: 'pie',
+	      data: {
+	        datasets: [{
+	          data: {{ data|safe }},
+	          backgroundColor: [
+	            '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+	          ],
+	          label: 'Population'
+	        }],
+	        labels: {{ labels_list|safe }}
+	      },
+	      options: {
+	        responsive: true
+	      }
+	    };
+
+	    window.onload = function() {
+	      var ctx = document.getElementById('pie-chart {{ index }}').getContext('2d');
+	      window.myPie = new Chart(ctx, config);
+	    };
+
+	  </script>
+	  {% endfor %}
+  
+
+{% endblock content %} 

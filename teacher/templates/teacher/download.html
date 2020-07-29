@@ -1,0 +1,80 @@
+{% extends 'course/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %} 
+{% load static %}
+	<!-- <div class="container mt-4">
+		<p class="h2">Analysis of Responses</p>
+		<div style="height: .25rem;width:100%;background-image: linear-gradient(to right,#0575E6,#021B79); border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; "></div>
+
+		
+	</div>		 -->
+ 
+	{% for one_student_response in all_students_responses %}
+
+		<div class="d-flex flex-row mt-2" align="center">
+			<div class="col-lg-9" align="center">
+				<div class="h6">
+				BHARATIYA VIDYA BHAVAN’S
+				</div>
+				<div class="h4">
+				SARDAR PATEL INSTITUTE OF TECHNOLOGY
+				</div>
+				<div >
+				<strong>(Autonomous Institute Affiliated to Mumbai University)</strong>
+				</div>
+				<div>
+					<span>DEPARTMENT OF COMPUTER ENGINEERING</span>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<img src="{% static 'course/logo.png' %}" width="110px">
+			</div>
+		</div>
+
+		<div style="height: 1px; background-color: #000" class="m-3"></div>
+	
+		<table class="table table-striped"
+			style="border-style: solid;border-color: black;border-width: 2px;border-radius: 2rem">
+			<thead>
+				<tr>
+					<th scope="col" class="align-middle">
+						Name
+					</th>
+					<th scope="col">
+						Question
+					</th>
+					<th scope="col">
+						Response
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+
+					{% for student_response in one_student_response %}
+
+						
+						
+						<tr>
+							<th scope="row">{{ student_response.0.user.first_name }} {{ student_response.0.user.last_name }}</th>
+						
+							<td>
+								{{ student_response.1 }}
+							</td>
+							<td>
+								{{ student_response.2 }}
+							</td>
+						</tr>
+							
+						
+						
+					{% endfor %}
+				
+			</tbody>
+		</table>
+
+		<div style="page-break-after: always;"></div>
+	
+	{% endfor %}
+	
+{% endblock content %}	 
